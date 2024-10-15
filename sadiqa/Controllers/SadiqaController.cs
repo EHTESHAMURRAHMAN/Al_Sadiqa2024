@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using sadiqa.Model;
 using Sadiqa.Model;
-
 namespace Sadiqa.Controllers
 {
     [Route("api/[controller]")]
@@ -40,7 +40,55 @@ namespace Sadiqa.Controllers
                 var result = obj.login(objInsertKey);
                 return result;
             }
-
+        [HttpPost]
+        [Route("addCatogrey")]
+        public CatogryResponse CatogryAdd([FromBody] Catogrey authenticate)
+        {
+            Catogrey catogry = new Catogrey();
+            var result = catogry.CatogryAdd(authenticate);
+            return result;
         }
+        [HttpGet]
+        [Route("getCatogryList/{userid}")]
+        public CatogryProfileResponse? GetCatogryList(int userid)
+        {
+            CatogryProfileResponse catogryProfileResponse = new CatogryProfileResponse();
+            catogryProfileResponse = Catogrey.GetCatogryList(userid);
+            return catogryProfileResponse;
+        }
+        [HttpGet]
+        [Route("getCatogryDetail/{userid}")]
+        public CatogryDetailResponse? GetCatogryDetails(int userid)
+        {
+            CatogryDetailResponse catogryDetailResponse = new CatogryDetailResponse();
+            catogryDetailResponse = Catogrey.GetCatogryDetails(userid);
+            return catogryDetailResponse;
+        }
+        [HttpPost]
+        [Route("addVender")]
+        public VenderResponse AddVender([FromBody] VenderList venderList)
+        {
+            VenderList ven = new VenderList();
+            var result = ven.AddVender(venderList);
+            return result;
+        }
+        [HttpGet]
+        [Route("getVenderList/{userid}")]
+        public VenderProfileResponse? GetVenderList(int userid)
+        {
+            VenderProfileResponse venderProfileResponse = new VenderProfileResponse();
+            venderProfileResponse = VenderList.GetVenderList(userid);
+            return venderProfileResponse;
+        }
+        [HttpGet]
+        [Route("getVenderDetail/{userid}")]
+        public VenderDetailResponse? GetVenderDetails(int userid)
+        {
+            VenderDetailResponse venderDetailResponse = new VenderDetailResponse();
+            venderDetailResponse = VenderList.GetVenderDetails(userid);
+            return venderDetailResponse;
+        }
+
+    }
     }
 
